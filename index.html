@@ -11,161 +11,240 @@
 
 <style>
 
+/* ---------- base ---------- */
+
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-font-family:Inter, sans-serif;
-background:#0f172a;
-color:#e2e8f0;
-line-height:1.6;
+  font-family:Inter, sans-serif;
+  background:#0b1120;
+  color:#e2e8f0;
+  line-height:1.5; /* slightly tighter line height */
 }
 
+/* background gradients */
+
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:
+    radial-gradient(circle at 20% 20%, #1d4ed8 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, #7c3aed 0%, transparent 40%);
+  opacity:.15;
+  z-index:-1;
+}
+
+/* layout */
+
 .container{
-max-width:1100px;
-margin:auto;
-padding:40px 20px;
+  max-width:1100px;
+  margin:auto;
+  padding:30px 15px; /* reduced padding */
 }
 
 section{
-margin-top:70px;
+  margin-top:50px; /* tighter than 80px */
 }
+
+/* hero */
 
 .hero{
-display:flex;
-flex-wrap:wrap;
-align-items:center;
-justify-content:space-between;
-gap:40px;
+  display:flex;
+  flex-direction:column;
+  gap:10px; /* less vertical gap */
 }
 
-.hero-text h1{
-font-size:46px;
-font-weight:600;
+.hero h1{
+  font-size:42px; /* slightly smaller */
 }
 
-.hero-text p{
-margin-top:10px;
-color:#94a3b8;
-font-size:18px;
-}
-
-.links{
-margin-top:20px;
+.hero p{
+  color:#94a3b8;
+  font-size:16px; /* slightly smaller */
 }
 
 .links a{
-margin-right:20px;
-text-decoration:none;
-color:#38bdf8;
-font-weight:500;
+  margin-right:15px; /* smaller gap */
+  color:#38bdf8;
+  text-decoration:none;
 }
 
-.links a:hover{
-text-decoration:underline;
-}
+/* headings */
 
 h2{
-font-size:28px;
-margin-bottom:20px;
-border-bottom:1px solid #334155;
-padding-bottom:10px;
+  font-size:24px; /* smaller */
+  margin-bottom:15px; /* tighter */
+  border-bottom:1px solid #334155;
+  padding-bottom:8px; /* reduced */
 }
 
+/* skills */
+
 .skills{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px; /* slightly smaller */
 }
 
 .skill{
-background:#1e293b;
-padding:6px 12px;
-border-radius:6px;
-font-size:14px;
+  background:#1e293b;
+  padding:5px 10px; /* smaller */
+  border-radius:6px;
+  font-size:13px; /* smaller */
 }
 
+/* projects */
+
 .projects{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-align-items:stretch;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); /* slightly smaller min width */
+  gap:20px; /* less gap */
 }
 
 .project{
-background:#1e293b;
-padding:20px;
-border-radius:10px;
-transition:.2s;
-
-display:flex;
-flex-direction:column;
-height:100%;
+  background:#1e293b;
+  border:1px solid #334155;
+  padding:18px; /* less padding */
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  transition:.25s;
 }
 
 .project:hover{
-transform:translateY(-5px);
-background:#243045;
-}
-
-.project h3{
-margin-bottom:10px;
+  transform:translateY(-4px); /* slightly less lift */
+  box-shadow:0 8px 25px rgba(0,0,0,.4);
+  border-color:#38bdf8;
 }
 
 .project p{
-color:#94a3b8;
-font-size:14px;
-margin-bottom:12px;
+  color:#94a3b8;
+  font-size:13px;
+  margin-bottom:12px;
 }
 
 .project-buttons{
-margin-top:auto;
-display:flex;
-gap:10px;
-flex-wrap:wrap;
+  margin-top:auto;
+  display:flex;
+  gap:8px;
 }
 
-.project a{
-text-decoration:none;
-color:#38bdf8;
-font-size:14px;
-background:#0f172a;
-padding:6px 10px;
-border-radius:6px;
-border:1px solid #334155;
-transition:.2s;
+.project a,
+.project button{
+  color:#38bdf8;
+  background:#0f172a;
+  border:1px solid #334155;
+  padding:5px 10px; /* smaller */
+  border-radius:6px;
+  cursor:pointer;
+  text-decoration:none;
 }
 
-.project a:hover{
-background:#1e293b;
+/* ---------- FULLSCREEN MODAL ---------- */
+
+.modal{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  background:#020617;
+  z-index:1000;
 }
 
-ul{
-color:#94a3b8;
-padding-left:18px;
+.modal-content{
+  display:flex;
+  width:100%;
+  height:100%;
+  overflow:hidden;
 }
+
+/* left description */
+
+.modal-info{
+  width:320px; /* slightly smaller */
+  background:#020617;
+  border-right:1px solid #334155;
+  padding:20px; /* tighter */
+  display:flex;
+  flex-direction:column;
+  gap:10px; /* tighter */
+}
+
+.modal-info h3{
+  color:#38bdf8;
+  font-size:20px; /* smaller */
+}
+
+.modal-info p{
+  color:#94a3b8;
+  font-size:13px; /* smaller */
+}
+
+.modal-info ul{
+  color:#94a3b8;
+  font-size:13px; /* smaller */
+  padding-left:16px;
+}
+
+/* demo area */
+
+.modal-demo{
+  flex:1;
+  position:relative;
+}
+
+.modal-demo iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+/* close button */
+
+.close{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:22px;
+  cursor:pointer;
+  color:white;
+  z-index:10;
+}
+
+/* footer */
 
 footer{
-text-align:center;
-margin-top:80px;
-padding:40px 0;
-color:#64748b;
-border-top:1px solid #334155;
+  text-align:center;
+  margin-top:50px; /* tighter than 80px */
+  padding:20px; /* less padding */
+  color:#64748b;
+  border-top:1px solid #334155;
 }
 
-@media(max-width:700px){
+/* responsive */
 
-.hero{
-flex-direction:column;
-align-items:flex-start;
-}
+@media(max-width:900px){
 
-.hero-text h1{
-font-size:34px;
-}
+  .modal-content{
+    flex-direction:column;
+  }
+
+  .modal-info{
+    width:100%;
+    height:200px; /* less height */
+    border-right:none;
+    border-bottom:1px solid #334155;
+  }
 
 }
 
@@ -179,42 +258,17 @@ font-size:34px;
 
 <section class="hero">
 
-<div class="hero-text">
-
 <h1>Jason Weller</h1>
 
 <p>
-Software Developer specialising in algorithm development, game systems,
-artificial intelligence, and scalable software architecture.
+Software Developer specialising in algorithms, artificial intelligence,
+and scalable systems.
 </p>
-
-<p>Open to Software Developer opportunities</p>
 
 <div class="links">
 <a href="mailto:jason.weller89@gmail.com">Email</a>
 <a href="https://github.com/jazora">GitHub</a>
 </div>
-
-</div>
-
-</section>
-
-
-<section>
-
-<h2>Professional Summary</h2>
-
-<p style="color:#94a3b8">
-Computer Science graduate with strong experience designing and building
-high-performance software systems, algorithms, and simulation environments.
-Skilled in multiple programming languages with a focus on scalable architecture,
-data structures, artificial intelligence systems, and performance optimisation.
-
-Experienced working with Agile development methodologies, collaborative
-version control workflows, and modern software engineering best practices
-including clean code principles, modular design, and maintainable system
-architecture.
-</p>
 
 </section>
 
@@ -231,70 +285,24 @@ architecture.
 <div class="skill">Java</div>
 <div class="skill">Python</div>
 <div class="skill">Javascript</div>
-<div class="skill">PHP</div>
 <div class="skill">SQL</div>
-<div class="skill">Kotlin</div>
-<div class="skill">Haskell</div>
-
-<div class="skill">HTML</div>
-<div class="skill">CSS</div>
-
-<div class="skill">Unity</div>
-<div class="skill">Godot</div>
-
-<div class="skill">Git</div>
-<div class="skill">GitHub</div>
-
-<div class="skill">Linux</div>
-<div class="skill">Cross Platform Development</div>
-
-<div class="skill">AWS</div>
-<div class="skill">Cloud Computing</div>
-
-</div>
-
-</section>
-
-
-<section>
-
-<h2>Software Engineering & Development Practices</h2>
-
-<div class="skills">
 
 <div class="skill">Agile</div>
 <div class="skill">Scrum</div>
-<div class="skill">Software Development Lifecycle</div>
-<div class="skill">Object Oriented Programming</div>
-<div class="skill">SOLID Principles</div>
-<div class="skill">Design Patterns</div>
-
-<div class="skill">Data Structures</div>
-<div class="skill">Algorithm Design</div>
-<div class="skill">Performance Optimisation</div>
-<div class="skill">Debugging</div>
-<div class="skill">Profiling</div>
-
-<div class="skill">REST APIs</div>
-<div class="skill">Backend Development</div>
-<div class="skill">Distributed Systems</div>
-<div class="skill">Microservices</div>
-
 <div class="skill">CI/CD</div>
 <div class="skill">DevOps</div>
-<div class="skill">Continuous Integration</div>
 
-<div class="skill">Unit Testing</div>
-<div class="skill">Test Driven Development</div>
-
-<div class="skill">Version Control</div>
-<div class="skill">Collaborative Development</div>
-
-<div class="skill">Clean Code</div>
+<div class="skill">REST APIs</div>
+<div class="skill">Design Patterns</div>
 <div class="skill">Software Architecture</div>
 
 <div class="skill">Artificial Intelligence</div>
 <div class="skill">Neural Networks</div>
+<div class="skill">Algorithm Design</div>
+
+<div class="skill">Git</div>
+<div class="skill">Linux</div>
+<div class="skill">AWS</div>
 
 </div>
 
@@ -307,16 +315,13 @@ architecture.
 
 <div class="projects">
 
-
 <div class="project">
 
 <h3>Regno</h3>
 
 <p>
-Independently developed strategy game implementing a scalable
-Hierarchical Pathfinding A* (HPA*) system with custom grid-based
-navigation architecture designed for large simulation environments
-and real-time AI decision making.
+Strategy game implementing scalable Hierarchical Pathfinding A*
+(HPA*) for efficient AI navigation across large environments.
 </p>
 
 <div class="project-buttons">
@@ -325,25 +330,20 @@ and real-time AI decision making.
 
 </div>
 
-
 <div class="project">
 
 <h3>Neural Network Simulation</h3>
 
 <p>
-Artificial intelligence simulation implementing the NEAT
-(NeuroEvolution of Augmenting Topologies) algorithm where
-autonomous agents evolve neural network architectures across
-multiple generations demonstrating emergent behaviour.
+Artificial life simulation where agents evolve behaviour using
+a neural network trained through the NEAT algorithm.
 </p>
 
 <div class="project-buttons">
 
-<a href="https://jazora.github.io/portfolio/slimes/slimes.html" target="_blank">
-Live Preview →
-</a>
+<a href="#" onclick="openModal(); return false;">Preview →</a>
 
-<a href="https://github.com/Jazora/NEAT-Final-Project" target="_blank">
+<a href="https://github.com/Jazora/NEAT-Final-Project">
 Source Code →
 </a>
 
@@ -351,15 +351,13 @@ Source Code →
 
 </div>
 
-
 <div class="project">
 
 <h3>Buccaneers</h3>
 
 <p>
-Turn-based multiplayer board game built with JavaFX implementing
-object-oriented architecture, game state management systems,
-and modular UI components.
+Turn-based multiplayer board game built using JavaFX and
+object-oriented architecture.
 </p>
 
 <div class="project-buttons">
@@ -368,77 +366,26 @@ and modular UI components.
 
 </div>
 
-
-<div class="project">
-
-<h3>Vocabulary Mobile Application</h3>
-
-<p>
-Android language learning application featuring educational
-games including vocabulary matching and crossword systems
-implemented using Kotlin.
-</p>
-
-<div class="project-buttons">
-<a href="https://github.com/Jazora/Vocabulary-Mobile-Application">Source Code →</a>
-</div>
-
-</div>
-
-
-<div class="project">
-
-<h3>B1ll Discord Bot</h3>
-
-<p>
-Automation bot built using JavaScript converting role-based
-messages into speech announcements using event-driven
-architecture and real-time message processing.
-</p>
-
-<div class="project-buttons">
-<a href="https://github.com/Jazora/b1ll">Source Code →</a>
-</div>
-
-</div>
-
-
 <div class="project">
 
 <h3>Feudal World</h3>
 
 <p>
-Large scale multiplayer roleplay modification for Mount & Blade
-Warband released publicly with over 20,000 downloads featuring
-custom gameplay systems and server-side scripting.
+Large multiplayer roleplay modification for Mount & Blade
+Warband with over 20,000 downloads.
 </p>
 
 <div class="project-buttons">
 <a href="https://www.moddb.com/mods/feudal-world">Project Page →</a>
+
+<a href="https://github.com/Jazora/Feudal_World">Source Code →</a>
 </div>
 
 </div>
-
 
 </div>
 
 </section>
-
-
-<section>
-
-<h2>Education</h2>
-
-<p style="color:#94a3b8">
-
-<strong>Aberystwyth University</strong><br>
-BSc Computer Science — Upper Second Class Honours (2:1)<br>
-2019 – 2023
-
-</p>
-
-</section>
-
 
 <footer>
 
@@ -447,6 +394,81 @@ BSc Computer Science — Upper Second Class Honours (2:1)<br>
 </footer>
 
 </div>
+
+<!-- ---------- DEMO MODAL ---------- -->
+
+<div id="demoModal" class="modal">
+
+<div class="modal-content">
+
+<div class="modal-info">
+
+<h3>Slime Simulation</h3>
+
+<h4>Overview</h4>
+<p>
+This interactive simulation uses NEAT (NeuroEvolution of Augmenting Topologies) to train slimes to hunt for food (green triangles). Each slime’s color and size represents its species, determined by its neural network connections. Each slime’s neural network decides its movement based on the position of the closest food, choosing to move up, down, left, or right. Slime movement toward food is not pre-programmed, each slime learns the best way to reach its food through evolution.
+</p>
+
+<h4>Controls</h4>
+<ul>
+<li>Press <strong>Start</strong> to begin the simulation.</li>
+<li>If the simulation is already running, pressing <strong>Start</strong> again will completely reset and restart it.</li>
+<li>Click on a slime to pause the simulation and view its neural network.</li>
+</ul>
+
+<h4>Evolution & Rounds</h4>
+<p>
+At the start of the simulation, every slime is mutated three times to encourage early progress. After each round, the top three species that collect the most food survive and generate offspring for the next round. The number of offspring is proportional to the food collected, and each offspring may undergo additional mutations. Slimes can survive up to 10 seconds without food, and consuming food resets their survival timer back to 10 seconds.
+</p>
+
+<h4>Victory Conditions</h4>
+<ul>
+<li>Each round lasts 1 minute. After a species survives for the full duration of a round, it counts as a successful round. Once a species survives three rounds, the simulation ends and that species is confirmed as successful.</li>
+</ul>
+
+</div>
+
+<div class="modal-demo">
+
+<span class="close" onclick="closeModal()">✕</span>
+
+<iframe id="slimeFrame"></iframe>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function openModal(){
+
+document.body.style.overflow="hidden"
+
+const modal=document.getElementById("demoModal")
+const frame=document.getElementById("slimeFrame")
+
+frame.src="https://jazora.github.io/portfolio/slimes/slimes.html"
+
+modal.style.display="block"
+
+}
+
+function closeModal(){
+
+document.body.style.overflow="auto"
+
+const modal=document.getElementById("demoModal")
+const frame=document.getElementById("slimeFrame")
+
+modal.style.display="none"
+frame.src=""
+
+}
+
+</script>
 
 </body>
 </html>
